@@ -10,32 +10,40 @@ int var[26];
 
 %%
 
-FICH : tmain taccoOuv {printf("tot\n");} MAIN taccoFerm 
-            {printf("main ici\n");}
-     ;
-MAIN : DECL_INT BODY 
-         {printf("declaration int ici\n");}
-    |  PRINTF BODY
-        {printf("declaration printf ici\n");}
+FICH : tmain taccoOuv {printf("tot\n");} MAIN taccoFerm {printf("main ici\n");}
+    ;
+MAIN : DECL_INT BODY {printf("declaration int ici\n");}
+    |  PRINTF BODY {printf("declaration printf ici\n");}
+    |  DECL_CONST BODY {printf("declaration const ici\n");}
     |
-     ;
+    ;
 
-DECL_INT : tint  tvar tpointvir
-          { printf("regle decl \n");}
-    |       tint  tvar tegal tnbDec tpointvir { printf("regle decl2 \n");}
-    |       tint  tvar tegal tnbExp tpointvir { printf("regle decl3 \n");}
-        ;
-BODY : DECL_INT
-     | PRINTF
-     |
-     ;
-
-PRINTF : tprintf tparOuv tvar tparFerm tpointvir { printf("regle printf \n");}
+DECL_INT : tint  tvar { printf("regle decl \n");}
+    |      tint  tvar tegal tnbDec { printf("regle decl2 \n");}
+    |      tint  tvar tegal tnbExp { printf("regle decl3 \n");}
+    ;
+DECL_CONST : tconst tint tvar { printf("regle decl const \n");}
+    |      tconst  tint tvar tegal tnbDec { printf("regle decl const2 \n");}
+    |      tconst  tint tvar tegal tnbExp { printf("regle decl const3 \n");}
+    ;
+BODY : DECL_INT {printf("dans body decl int\n");}
+    |  DECL_CONST {printf("dans body decl const\n");}
+    |  PRINTF {printf("dans body printf\n");}
+    |
+    ;
+PRINTF : tprintf tparOuv tvar tparFerm { printf("regle printf \n");}
        ;
-/* ADD : terme tplus terme {printf("addition\n");}
-terme : tnbDec
-    |   tnbExp
-*/
+TERME : tnbDec {printf("nombre decimal\n");}
+    |   tnbExp {printf("nombre expo\n");}
+    ;
+ADD : TERME tplus TERME {printf("addition\n");}
+    ;
+SUB : TERME tmoins TERME {printf("soustraction\n");}
+    ;
+MUL : TERME tfois TERME {printf("multiplication\n");}
+    ;
+DIV : TERME tdiv TERME {printf("division\n");}
+    ;
 
 %%
 int main(void) {

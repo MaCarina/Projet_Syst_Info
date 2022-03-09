@@ -17,7 +17,7 @@
 "(" {return tparOuv;}
 ")" {return tparFerm;}
 [ \n\t]+ {} /* {return tretour;} */
-";" {return tpointvir;}
+";" {}/*{return tpointvir;}*/
 "printf" {return tprintf;}
 [e][-+]?[0-9]+ {yylval.nb=atof(yytext); return tnbExp;}
 [0-9]+ {yylval.nb=atoi(yytext); return tnbDec;}

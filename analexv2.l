@@ -21,6 +21,6 @@
 "printf" {return tprintf;}
 [e][-+]?[0-9]+ {yylval.nb=atof(yytext); return tnbExp;}
 [0-9]+ {yylval.nb=atoi(yytext); return tnbDec;}
-[a-zA-Z][a-z0-9A-Z_]* {yylval.var=malloc(yyleng*sizeof(char));strcpy(yylval.var, yytext);return tvar;}
+[a-zA-Z][a-z0-9A-Z_]* {strcpy(yylval.var, yytext);return tvar;}
 
 %%

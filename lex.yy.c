@@ -818,7 +818,7 @@ YY_RULE_SETUP
 case 14:
 YY_RULE_SETUP
 #line 20 "analexv2.l"
-{return tpointvir;}
+{}/*{return tpointvir;}*/
 	YY_BREAK
 case 15:
 YY_RULE_SETUP

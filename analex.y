@@ -10,13 +10,17 @@ int var[26];
 
 %%
 
-FICH : tmain taccoOuv {printf("tot\n");} MAIN taccoFerm {printf("main ici\n");}
+FICH : tmain taccoOuv {printf("tot\n");} BODY taccoFerm {printf("main ici\n");}
     ;
-MAIN : DECL_INT BODY {printf("declaration int ici\n");}
-    |  PRINTF BODY {printf("declaration printf ici\n");}
-    |  DECL_CONST BODY {printf("declaration const ici\n");}
-    |
-    ;
+// MAIN : DECL_INT BODY {printf("declaration int ici\n");}
+//     |  PRINTF BODY {printf("declaration printf ici\n");}
+//     |  DECL_CONST BODY {printf("declaration const ici\n");}
+//     |  ADD BODY {printf("declaration ADD ici\n");}
+//     |  SUB BODY {printf("declaration SUB ici\n");}
+//     |  MUL BODY {printf("declaration MUL ici\n");}
+//     |  DIV BODY {printf("declaration DIV ici\n");}
+//     |
+//     ;
 
 DECL_INT : tint  tvar { printf("regle decl \n");}
     |      tint  tvar tegal tnbDec { printf("regle decl2 \n");}
@@ -26,15 +30,21 @@ DECL_CONST : tconst tint tvar { printf("regle decl const \n");}
     |      tconst  tint tvar tegal tnbDec { printf("regle decl const2 \n");}
     |      tconst  tint tvar tegal tnbExp { printf("regle decl const3 \n");}
     ;
-BODY : DECL_INT {printf("dans body decl int\n");}
-    |  DECL_CONST {printf("dans body decl const\n");}
-    |  PRINTF {printf("dans body printf\n");}
+BODY : DECL_INT BODY {printf("dans body decl int\n");}
+    |  DECL_CONST BODY {printf("dans body decl const\n");}
+    |  PRINTF BODY {printf("dans body printf\n");}
+    |  ADD BODY {printf("declaration ADD ici\n");}
+    |  SUB BODY {printf("declaration SUB ici\n");}
+    |  MUL BODY {printf("declaration MUL ici\n");}
+    |  DIV BODY {printf("declaration DIV ici\n");}
     |
     ;
 PRINTF : tprintf tparOuv tvar tparFerm { printf("regle printf \n");}
        ;
 TERME : tnbDec {printf("nombre decimal\n");}
     |   tnbExp {printf("nombre expo\n");}
+    ;
+CALCUL : tvar tegal OPERATION
     ;
 ADD : TERME tplus TERME {printf("addition\n");}
     ;
@@ -43,6 +53,11 @@ SUB : TERME tmoins TERME {printf("soustraction\n");}
 MUL : TERME tfois TERME {printf("multiplication\n");}
     ;
 DIV : TERME tdiv TERME {printf("division\n");}
+    ;
+OPERATION : ADD
+    |       SUB
+    |       MUL
+    |       DIV
     ;
 
 %%

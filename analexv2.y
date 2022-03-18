@@ -37,7 +37,7 @@ TERME : tnbDec {printf("nombre decimal\n");}
     ;
 CALCUL : tvar tegal OPERATION {printf("calcul\n");}
     ;
-ADD : TERME tplus TERME {printf("addition\n");}
+ADD : TERME tplus TERME {ADD $1 $3 $1; printf("addition\n");}
     ;
 SUB : TERME tmoins TERME {printf("soustraction\n");}
     ;

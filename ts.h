@@ -8,7 +8,6 @@ typedef struct {
     int prof; // taille de memoire, imbrication pour différencier les var avec même nom
 } symbol;
 
-// void init();
 void addts(char* var, char* type);
 int searchind(char* var);
 void afficher();

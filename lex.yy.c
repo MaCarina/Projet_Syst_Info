@@ -838,7 +838,7 @@ YY_RULE_SETUP
 case 18:
 YY_RULE_SETUP
 #line 24 "analexv2.l"
-{yylval.var=malloc(yyleng*sizeof(char));strcpy(yylval.var, yytext);return tvar;}
+{strcpy(yylval.var, yytext);return tvar;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP

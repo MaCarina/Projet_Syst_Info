@@ -10,17 +10,8 @@
 symbol ts[LENGTH_TAB] ;
 int compteur = 0;
 
-// struct symbol* ts[LENGTH_TAB];
-// int* compteur = 0;
-
-// void init(){
-//     for (int i=0;i<LENGTH_TAB;i++){
-//         ts[i]=NULL;
-//     }
-// }
-
 void addts(char* var, char* type){
-    printf("%d\n\n", searchind(var));
+    //printf("%d\n\n", searchind(var));
     if (searchind(var) == -1){
         symbol newSymbol;
         newSymbol.var = strdup(var); 
@@ -29,16 +20,16 @@ void addts(char* var, char* type){
         compteur++;
         newSymbol.prof = 0;
         ts[newSymbol.ind] = newSymbol;
-        printf("ajouté dans le tableau avec indice : %d\n", newSymbol.ind);
+        //printf("ajouté dans le tableau avec indice : %d\n", newSymbol.ind);
     }
     else {
-        printf("Exists already\n");
+        //printf("Exists already\n");
     }
 }
 
 int searchind(char* var){
     for(int i = 0; i< compteur; i++){
-        printf("var: %s \n tabVar: %s\n", var, ts[i].var);
+        //printf("var: %s \n tabVar: %s\n", var, ts[i].var);
         if (!strcmp(ts[i].var, var)){ // strcmp retourne 0 si egaux
             return ts[i].ind;
         }
@@ -60,16 +51,18 @@ void afficher(){
     printf("\n");
     printf("\n");
 }
-
+/*
 int main(int argc, char *argv[]){
     // init();
-    afficher();
+    //afficher();
     addts("a", "int");
     addts("a", "int");
     addts("a", "int");
     addts("a", "int");
     addts("a", "int");
     addts("b", "int");
+    addts("c", "int");
     afficher();
     return 0;
-}
+    //dépiler de la table les var quand on voit }, seulement celle de la bonne prof
+}*/

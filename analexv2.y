@@ -12,20 +12,11 @@ int var[26];
 
 %%
 
-FICH : tmain taccoOuv {printf("tot\n");} BODY taccoFerm {printf("main ici\n");}
+FICH : tmain taccoOuv BODY taccoFerm {printf("main ici\n");}
     ;
-// MAIN : DECL_INT BODY {printf("declaration int ici\n");}
-//     |  PRINTF BODY {printf("declaration printf ici\n");}
-//     |  DECL_CONST BODY {printf("declaration const ici\n");}
-//     |  ADD BODY {printf("declaration ADD ici\n");}
-//     |  SUB BODY {printf("declaration SUB ici\n");}
-//     |  MUL BODY {printf("declaration MUL ici\n");}
-//     |  DIV BODY {printf("declaration DIV ici\n");}
-//     |
-//     ;
 
 DECL_INT : tint  tvar { addts($2,"int");afficher();} // mettre dans la table des symboles
-    |      tint  tvar tegal tnbDec { addts($2,"int");afficher();} // { printf("regle decl2 %s %d \n", $2,$4);}
+    |      tint  tvar tegal tnbDec { addts($2,"int");afficher();}
     |      tint  tvar tegal tnbExp { addts($2,"int");afficher();}
     ;
 DECL_CONST : tconst tint tvar { addts($3,"int");afficher();}
@@ -36,15 +27,13 @@ BODY : DECL_INT BODY {printf("dans body decl int\n");}
     |  DECL_CONST BODY {printf("dans body decl const\n");}
     |  PRINTF BODY {printf("dans body printf\n");}
     |  CALCUL BODY {printf("declaration CALCUL ici\n");}
-    // |  SUB BODY {printf("declaration SUB ici\n");}
-    // |  MUL BODY {printf("declaration MUL ici\n");}
-    // |  DIV BODY {printf("declaration DIV ici\n");}
     |
     ;
 PRINTF : tprintf tparOuv tvar tparFerm { printf("regle printf \n");}
        ;
 TERME : tnbDec {printf("nombre decimal\n");}
     |   tnbExp {printf("nombre expo\n");}
+    |   tvar {printf("nombre var\n");}
     ;
 CALCUL : tvar tegal OPERATION {printf("calcul\n");}
     ;

@@ -93,16 +93,16 @@ extern int yydebug;
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-#line 6 "analex.y"
+#line 7 "analexv2.y"
 union yylval
 {
-#line 6 "analex.y"
-int nb; char * var;
+#line 7 "analexv2.y"
+int nb; char var[16];
 
 #line 103 "y.tab.h"
 
 };
-#line 6 "analex.y"
+#line 7 "analexv2.y"
 typedef union yylval YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1

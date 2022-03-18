@@ -1,11 +1,11 @@
-GRM=analex.y
+GRM=analexv2.y
 LEX=analexv2.l
 BIN=analex
 
 CC=gcc
 CFLAGS=-Wall -g
 
-OBJ=y.tab.o lex.yy.o main.o
+OBJ=y.tab.o lex.yy.o
 
 all: $(BIN)
 

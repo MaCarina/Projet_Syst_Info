@@ -7,7 +7,7 @@
 // #define COMPTEUR 0
 #define LENGTH_TAB 100
 
-symbol ts[LENGTH_TAB] ;
+symbol tss[LENGTH_TAB] ;
 int compteur = 0;
 
 void addts(char* var, char* type){
@@ -19,7 +19,7 @@ void addts(char* var, char* type){
         newSymbol.ind = compteur;
         compteur++;
         newSymbol.prof = 0;
-        ts[newSymbol.ind] = newSymbol;
+        tss[newSymbol.ind] = newSymbol;
         //printf("ajouté dans le tableau avec indice : %d\n", newSymbol.ind);
     }
     else {
@@ -30,11 +30,40 @@ void addts(char* var, char* type){
 int searchind(char* var){
     for(int i = 0; i< compteur; i++){
         //printf("var: %s \n tabVar: %s\n", var, ts[i].var);
-        if (!strcmp(ts[i].var, var)){ // strcmp retourne 0 si egaux
-            return ts[i].ind;
+        if (!strcmp(tss[i].var, var)){ // strcmp retourne 0 si egaux
+            return tss[i].ind;
         }
     }
     return -1;
+}
+
+symbol getSymbol(int s){
+    return tss[s];
+}
+
+int getIndexCourant() {
+    return compteur;
+}
+
+void addvarTemp(){
+    symbol newSymbol;
+    sprintf(newSymbol.var,"%d",val); 
+    newSymbol.var = "";
+    printf("%d %s\n", val,newSymbol.var);
+    newSymbol.type = "varTemp"; 
+    newSymbol.ind = compteur;
+    newSymbol.prof = 0;
+    compteur++;
+    tss[newSymbol.ind]=newSymbol;
+    //ecrire la valeur à l'adresse
+}
+
+void depileTS(){
+    tss[compteur].var = NULL; 
+    tss[compteur].type = NULL; 
+    tss[compteur].ind = 0;
+    tss[compteur].prof = 0;
+    compteur --;
 }
 
 void afficher(){
@@ -43,7 +72,7 @@ void afficher(){
     }
     printf("\n");
     for(int i = 0; i < compteur; i++){
-        printf("| @%02i | %8s | %8s |\n", i, ts[i].var, ts[i].type);
+        printf("| @%02i | %8s | %8s |\n", i, tss[i].var, tss[i].type);
     }
     for (int i = 0; i < 30-1; i++) {
         printf("-");

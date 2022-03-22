@@ -10,4 +10,8 @@ typedef struct {
 
 void addts(char* var, char* type);
 int searchind(char* var);
+symbol getSymbol(int s);
+int getIndexCourant();
+void addvarTemp(int val);
+void depileTS();
 void afficher();

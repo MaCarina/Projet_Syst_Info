@@ -1,13 +1,15 @@
 %{
 #include <stdlib.h>
 #include <stdio.h>
-#include "ts.c"
+#include "ts.h"
+#include "ti.h"
 int var[26];
 %}
 %union yylval {int nb; char var[16];}
 %token tint tconst tmain taccoOuv taccoFerm tplus tmoins tfois 
-%token tdiv tegal tparOuv tparFerm tblanc tretour tpointvir tprintf tnbExp 
-%token <nb> tnbDec
+%token tdiv tegal tparOuv tparFerm tblanc tretour tpointvir tprintf
+%token <nb> tnbDec 
+%token <nb> tnbExp
 %token <var> tvar
 
 %%
@@ -31,25 +33,24 @@ BODY : DECL_INT BODY {printf("dans body decl int\n");}
     ;
 PRINTF : tprintf tparOuv tvar tparFerm { printf("regle printf \n");}
        ;
-TERME : tnbDec {printf("nombre decimal\n");}
-    |   tnbExp {printf("nombre expo\n");}
-    |   tvar {printf("nombre var\n");}
+TERME : tnbDec {addvarTemp($1); afficher();printf("nombre decimal\n");}
+    |   tnbExp {addvarTemp($1); afficher();printf("nombre expo\n");}
+    |   tvar {addts($1,"int");printf("nombre var\n");}
     ;
 CALCUL : tvar tegal OPERATION {printf("calcul\n");}
     ;
-ADD : TERME tplus TERME {ADD $1 $3 $1; printf("addition\n");}
+ADD : TERME {printf("terme\n");} tplus {printf("plus\n");} TERME {addti("ADD"); afficherti();printf("addition\n");}
     ;
-SUB : TERME tmoins TERME {printf("soustraction\n");}
+SUB : TERME tmoins TERME {addti("SUB");afficherti();printf("soustraction\n");}
     ;
-MUL : TERME tfois TERME {printf("multiplication\n");}
+MUL : TERME tfois TERME {addti("MUL");afficherti();printf("multiplication\n");}
     ;
-DIV : TERME tdiv TERME {printf("division\n");}
+DIV : TERME tdiv TERME {addti("DIV");afficherti();printf("division\n");}
     ;
 OPERATION : ADD
     |       SUB
     |       MUL
     |       DIV
-    |       TERME
     ;
 
 %%

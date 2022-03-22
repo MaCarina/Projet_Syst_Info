@@ -1,33 +1,38 @@
 #include "ts.h"
+#include "ti.h"
 
 #include <string.h>
 
 #define LENGTH_TAB 100
 
-instru ti[LENGTH_TAB] ;
-int index = 0;
+instru tii[LENGTH_TAB] ;
+int indice = 0;
 
 void addti(char* type){
     //printf("%d\n\n", searchind(var));
     instru newInstru;
     newInstru.ins = strdup(type); 
-    newInstru.ope1 = (&ts + ts[compteur].ind); 
-    newInstru.ope2 = ;
-    newInstru.ope3 = ;
-    ti[index] = newInstru;
-    index++;
-    //printf("ajouté dans le tableau avec indice : %d\n", newSymbol.ind);
+    //récupérer les var au sommet de la table des symboles
+    newInstru.ope1 = getSymbol(getIndexCourant()-1).ind;
+    depileTS();
+    newInstru.ope2 = getSymbol(getIndexCourant()-1).ind;
+    depileTS();
+    newInstru.ope3 = getSymbol(getIndexCourant()-1).ind;
+    depileTS();
+    tii[indice] = newInstru;
+    indice++;
+    printf("ajouté dans le tableau : %s\n", newInstru.ins);
 }
 
 void afficherti(){
-    for (int i = 0; i < 30-1; i++) {
+    for (int i = 0; i < 52-1; i++) {
         printf("-");
     }
     printf("\n");
-    for(int i = 0; i < compteur; i++){
-        printf("| @%02i | %8s | %8s |\n", i, ti[i].var, ti[i].type);
+    for(int i = 0; i < indice; i++){
+        printf("| @%02i | %8s | %8i | %8i | %8i |\n", i, tii[i].ins, tii[i].ope1,tii[i].ope2,tii[i].ope3);
     }
-    for (int i = 0; i < 30-1; i++) {
+    for (int i = 0; i < 52-1; i++) {
         printf("-");
     }
     printf("\n");
@@ -36,7 +41,7 @@ void afficherti(){
 /*
 int main(int argc, char *argv[]){
     // init();
-    //afficher();
+    afficherti();
     addts("a", "int");
     addts("a", "int");
     addts("a", "int");
@@ -45,6 +50,9 @@ int main(int argc, char *argv[]){
     addts("b", "int");
     addts("c", "int");
     afficher();
+    addti("MUL");
+    afficher();
+    afficherti();
     return 0;
     //dépiler de la table les var quand on voit }, seulement celle de la bonne prof
 }*/

@@ -65,8 +65,8 @@ extern int yydebug;
     tretour = 271,
     tpointvir = 272,
     tprintf = 273,
-    tnbExp = 274,
-    tnbDec = 275,
+    tnbDec = 274,
+    tnbExp = 275,
     tvar = 276
   };
 #endif
@@ -87,22 +87,22 @@ extern int yydebug;
 #define tretour 271
 #define tpointvir 272
 #define tprintf 273
-#define tnbExp 274
-#define tnbDec 275
+#define tnbDec 274
+#define tnbExp 275
 #define tvar 276
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-#line 7 "analexv2.y"
+#line 8 "analexv2.y"
 union yylval
 {
-#line 7 "analexv2.y"
+#line 8 "analexv2.y"
 int nb; char var[16];
 
 #line 103 "y.tab.h"
 
 };
-#line 7 "analexv2.y"
+#line 8 "analexv2.y"
 typedef union yylval YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1

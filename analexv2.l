@@ -7,6 +7,9 @@
 "int" {return tint;}
 "const" {return tconst;}
 "main()" {return tmain;}
+"if" {return tif;}
+"else" {return telse;}
+"else if" {return telif;}
 "{" {return taccoOuv;}
 "}" {return taccoFerm;}
 "+" {return tplus;}

@@ -45,7 +45,7 @@ int getIndexCourant() {
     return compteur;
 }
 
-void addvarTemp(){
+void addvarTemp(int val){
     symbol newSymbol;
     sprintf(newSymbol.var,"%d",val); 
     newSymbol.var = "";

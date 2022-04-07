@@ -4,5 +4,6 @@ main(){
     int hanne=1;
     const int carina=2;
     printf(toto);
-    toto = 7 + 2;
-}
+    if (toto==2) {
+        printf("wsh");
+    }

@@ -57,17 +57,20 @@ extern int yydebug;
     tplus = 263,
     tmoins = 264,
     tfois = 265,
-    tdiv = 266,
-    tegal = 267,
-    tparOuv = 268,
-    tparFerm = 269,
-    tblanc = 270,
-    tretour = 271,
-    tpointvir = 272,
-    tprintf = 273,
-    tnbDec = 274,
-    tnbExp = 275,
-    tvar = 276
+    tif = 266,
+    telse = 267,
+    telif = 268,
+    tdiv = 269,
+    tegal = 270,
+    tparOuv = 271,
+    tparFerm = 272,
+    tblanc = 273,
+    tretour = 274,
+    tpointvir = 275,
+    tprintf = 276,
+    tnbDec = 277,
+    tnbExp = 278,
+    tvar = 279
   };
 #endif
 /* Tokens.  */
@@ -79,17 +82,20 @@ extern int yydebug;
 #define tplus 263
 #define tmoins 264
 #define tfois 265
-#define tdiv 266
-#define tegal 267
-#define tparOuv 268
-#define tparFerm 269
-#define tblanc 270
-#define tretour 271
-#define tpointvir 272
-#define tprintf 273
-#define tnbDec 274
-#define tnbExp 275
-#define tvar 276
+#define tif 266
+#define telse 267
+#define telif 268
+#define tdiv 269
+#define tegal 270
+#define tparOuv 271
+#define tparFerm 272
+#define tblanc 273
+#define tretour 274
+#define tpointvir 275
+#define tprintf 276
+#define tnbDec 277
+#define tnbExp 278
+#define tvar 279
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -99,7 +105,7 @@ union yylval
 #line 8 "analexv2.y"
 int nb; char var[16];
 
-#line 103 "y.tab.h"
+#line 109 "y.tab.h"
 
 };
 #line 8 "analexv2.y"

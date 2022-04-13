@@ -1,5 +1,6 @@
 %{
 #include "y.tab.h"
+int index_lines = 1;
 %}
 %option noyywrap
 
@@ -19,8 +20,9 @@
 "=" {return tegal;}
 "(" {return tparOuv;}
 ")" {return tparFerm;}
-[ \n\t]+ {} /* {return tretour;} */
-";" {}/*{return tpointvir;}*/
+[ \t]+ {} /* {return tretour;} */
+\n  {index_lines++;}
+";" {return tpointvir;}/*{return tpointvir;}*/
 "printf" {return tprintf;}
 [e][-+]?[0-9]+ {yylval.nb=atof(yytext); return tnbExp;}
 [0-9]+ {yylval.nb=atoi(yytext); return tnbDec;}

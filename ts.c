@@ -9,6 +9,7 @@
 
 symbol tss[LENGTH_TAB] ;
 int compteur = 0;
+int indice_varTemp = 0;
 
 void addts(char* var, char* type){
     //printf("%d\n\n", searchind(var));
@@ -47,8 +48,9 @@ int getIndexCourant() {
 
 void addvarTemp(int val){
     symbol newSymbol;
-    sprintf(newSymbol.var,"%d",val); 
-    newSymbol.var = "";
+    //sprintf(newSymbol.var,"%d",val); 
+    newSymbol.var = "V";
+    indice_varTemp++;
     printf("%d %s\n", val,newSymbol.var);
     newSymbol.type = "varTemp"; 
     newSymbol.ind = compteur;
@@ -57,6 +59,9 @@ void addvarTemp(int val){
     tss[newSymbol.ind]=newSymbol;
     //ecrire la valeur à l'adresse
 }
+
+//faire une fonction qui retourne une adresse libre
+//faire une fonction qui libère les adresses prises par les varTemp
 
 void depileTS(){
     tss[compteur].var = NULL; 

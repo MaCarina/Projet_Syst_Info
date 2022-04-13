@@ -1,0 +1,882 @@
+Terminaux inutilisés dans la grammaire
+
+    tfois
+    tdiv
+    tblanc
+    tretour
+
+
+Grammaire
+
+    0 $accept: FICH $end
+
+    1 FICH: tmain taccoOuv BODY taccoFerm
+
+    2 DECL_INT: tint tvar tpointvir
+    3         | tint tvar tegal tnbDec tpointvir
+    4         | tint tvar tegal tnbExp tpointvir
+
+    5 DECL_CONST: tconst tint tvar tpointvir
+    6           | tconst tint tvar tegal tnbDec tpointvir
+    7           | tconst tint tvar tegal tnbExp tpointvir
+
+    8 BODY: DECL_INT BODY
+    9     | DECL_CONST BODY
+   10     | PRINTF BODY
+   11     | CALCUL BODY
+   12     | IF BODY
+   13     | %empty
+
+   14 CONDITION: tparOuv tvar tegal tegal tnbDec tparFerm
+
+   15 IF: tif CONDITION taccoOuv BODY taccoFerm
+   16   | tif CONDITION taccoOuv BODY taccoFerm ELSE
+   17   | tif CONDITION taccoOuv BODY taccoFerm ELIF
+
+   18 ELSE: telse taccoOuv BODY taccoFerm
+
+   19 ELIF: telif CONDITION taccoOuv BODY taccoFerm ELIF
+   20     | telif CONDITION taccoOuv BODY taccoFerm
+   21     | telif CONDITION taccoOuv BODY taccoFerm ELSE
+
+   22 PRINTF: tprintf tparOuv tvar tparFerm tpointvir
+
+   23 TERME: tnbDec
+   24      | tnbExp
+   25      | tvar
+
+   26 CALCUL: tvar tegal OPERATION tpointvir
+
+   27 OPERATION: TERME tmoins TERME
+
+   28 $@1: %empty
+
+   29 $@2: %empty
+
+   30 OPERATION: TERME $@1 tplus $@2 TERME
+   31          | tnbDec
+   32          | tvar
+
+
+Terminaux, suivis des règles où ils apparaissent
+
+    $end (0) 0
+    error (256)
+    tint (258) 2 3 4 5 6 7
+    tconst (259) 5 6 7
+    tmain (260) 1
+    taccoOuv (261) 1 15 16 17 18 19 20 21
+    taccoFerm (262) 1 15 16 17 18 19 20 21
+    tplus (263) 30
+    tmoins (264) 27
+    tfois (265)
+    tif (266) 15 16 17
+    telse (267) 18
+    telif (268) 19 20 21
+    tdiv (269)
+    tegal (270) 3 4 6 7 14 26
+    tparOuv (271) 14 22
+    tparFerm (272) 14 22
+    tblanc (273)
+    tretour (274)
+    tpointvir (275) 2 3 4 5 6 7 22 26
+    tprintf (276) 22
+    tnbDec <nb> (277) 3 6 14 23 31
+    tnbExp <nb> (278) 4 7 24
+    tvar <var> (279) 2 3 4 5 6 7 14 22 25 26 32
+
+
+Non-terminaux, suivis des règles où ils apparaissent
+
+    $accept (25)
+        à gauche: 0
+    FICH (26)
+        à gauche: 1
+        à droite: 0
+    DECL_INT (27)
+        à gauche: 2 3 4
+        à droite: 8
+    DECL_CONST (28)
+        à gauche: 5 6 7
+        à droite: 9
+    BODY (29)
+        à gauche: 8 9 10 11 12 13
+        à droite: 1 8 9 10 11 12 15 16 17 18 19 20 21
+    CONDITION (30)
+        à gauche: 14
+        à droite: 15 16 17 19 20 21
+    IF (31)
+        à gauche: 15 16 17
+        à droite: 12
+    ELSE (32)
+        à gauche: 18
+        à droite: 16 21
+    ELIF (33)
+        à gauche: 19 20 21
+        à droite: 17 19
+    PRINTF (34)
+        à gauche: 22
+        à droite: 10
+    TERME (35)
+        à gauche: 23 24 25
+        à droite: 27 30
+    CALCUL (36)
+        à gauche: 26
+        à droite: 11
+    OPERATION (37)
+        à gauche: 27 30 31 32
+        à droite: 26
+    $@1 (38)
+        à gauche: 28
+        à droite: 30
+    $@2 (39)
+        à gauche: 29
+        à droite: 30
+
+
+État 0
+
+    0 $accept: . FICH $end
+
+    tmain  décalage et aller à l'état 1
+
+    FICH  aller à l'état 2
+
+
+État 1
+
+    1 FICH: tmain . taccoOuv BODY taccoFerm
+
+    taccoOuv  décalage et aller à l'état 3
+
+
+État 2
+
+    0 $accept: FICH . $end
+
+    $end  décalage et aller à l'état 4
+
+
+État 3
+
+    1 FICH: tmain taccoOuv . BODY taccoFerm
+
+    tint     décalage et aller à l'état 5
+    tconst   décalage et aller à l'état 6
+    tif      décalage et aller à l'état 7
+    tprintf  décalage et aller à l'état 8
+    tvar     décalage et aller à l'état 9
+
+    $défaut  réduction par utilisation de la règle 13 (BODY)
+
+    DECL_INT    aller à l'état 10
+    DECL_CONST  aller à l'état 11
+    BODY        aller à l'état 12
+    IF          aller à l'état 13
+    PRINTF      aller à l'état 14
+    CALCUL      aller à l'état 15
+
+
+État 4
+
+    0 $accept: FICH $end .
+
+    $défaut  accepter
+
+
+État 5
+
+    2 DECL_INT: tint . tvar tpointvir
+    3         | tint . tvar tegal tnbDec tpointvir
+    4         | tint . tvar tegal tnbExp tpointvir
+
+    tvar  décalage et aller à l'état 16
+
+
+État 6
+
+    5 DECL_CONST: tconst . tint tvar tpointvir
+    6           | tconst . tint tvar tegal tnbDec tpointvir
+    7           | tconst . tint tvar tegal tnbExp tpointvir
+
+    tint  décalage et aller à l'état 17
+
+
+État 7
+
+   15 IF: tif . CONDITION taccoOuv BODY taccoFerm
+   16   | tif . CONDITION taccoOuv BODY taccoFerm ELSE
+   17   | tif . CONDITION taccoOuv BODY taccoFerm ELIF
+
+    tparOuv  décalage et aller à l'état 18
+
+    CONDITION  aller à l'état 19
+
+
+État 8
+
+   22 PRINTF: tprintf . tparOuv tvar tparFerm tpointvir
+
+    tparOuv  décalage et aller à l'état 20
+
+
+État 9
+
+   26 CALCUL: tvar . tegal OPERATION tpointvir
+
+    tegal  décalage et aller à l'état 21
+
+
+État 10
+
+    8 BODY: DECL_INT . BODY
+
+    tint     décalage et aller à l'état 5
+    tconst   décalage et aller à l'état 6
+    tif      décalage et aller à l'état 7
+    tprintf  décalage et aller à l'état 8
+    tvar     décalage et aller à l'état 9
+
+    $défaut  réduction par utilisation de la règle 13 (BODY)
+
+    DECL_INT    aller à l'état 10
+    DECL_CONST  aller à l'état 11
+    BODY        aller à l'état 22
+    IF          aller à l'état 13
+    PRINTF      aller à l'état 14
+    CALCUL      aller à l'état 15
+
+
+État 11
+
+    9 BODY: DECL_CONST . BODY
+
+    tint     décalage et aller à l'état 5
+    tconst   décalage et aller à l'état 6
+    tif      décalage et aller à l'état 7
+    tprintf  décalage et aller à l'état 8
+    tvar     décalage et aller à l'état 9
+
+    $défaut  réduction par utilisation de la règle 13 (BODY)
+
+    DECL_INT    aller à l'état 10
+    DECL_CONST  aller à l'état 11
+    BODY        aller à l'état 23
+    IF          aller à l'état 13
+    PRINTF      aller à l'état 14
+    CALCUL      aller à l'état 15
+
+
+État 12
+
+    1 FICH: tmain taccoOuv BODY . taccoFerm
+
+    taccoFerm  décalage et aller à l'état 24
+
+
+État 13
+
+   12 BODY: IF . BODY
+
+    tint     décalage et aller à l'état 5
+    tconst   décalage et aller à l'état 6
+    tif      décalage et aller à l'état 7
+    tprintf  décalage et aller à l'état 8
+    tvar     décalage et aller à l'état 9
+
+    $défaut  réduction par utilisation de la règle 13 (BODY)
+
+    DECL_INT    aller à l'état 10
+    DECL_CONST  aller à l'état 11
+    BODY        aller à l'état 25
+    IF          aller à l'état 13
+    PRINTF      aller à l'état 14
+    CALCUL      aller à l'état 15
+
+
+État 14
+
+   10 BODY: PRINTF . BODY
+
+    tint     décalage et aller à l'état 5
+    tconst   décalage et aller à l'état 6
+    tif      décalage et aller à l'état 7
+    tprintf  décalage et aller à l'état 8
+    tvar     décalage et aller à l'état 9
+
+    $défaut  réduction par utilisation de la règle 13 (BODY)
+
+    DECL_INT    aller à l'état 10
+    DECL_CONST  aller à l'état 11
+    BODY        aller à l'état 26
+    IF          aller à l'état 13
+    PRINTF      aller à l'état 14
+    CALCUL      aller à l'état 15
+
+
+État 15
+
+   11 BODY: CALCUL . BODY
+
+    tint     décalage et aller à l'état 5
+    tconst   décalage et aller à l'état 6
+    tif      décalage et aller à l'état 7
+    tprintf  décalage et aller à l'état 8
+    tvar     décalage et aller à l'état 9
+
+    $défaut  réduction par utilisation de la règle 13 (BODY)
+
+    DECL_INT    aller à l'état 10
+    DECL_CONST  aller à l'état 11
+    BODY        aller à l'état 27
+    IF          aller à l'état 13
+    PRINTF      aller à l'état 14
+    CALCUL      aller à l'état 15
+
+
+État 16
+
+    2 DECL_INT: tint tvar . tpointvir
+    3         | tint tvar . tegal tnbDec tpointvir
+    4         | tint tvar . tegal tnbExp tpointvir
+
+    tegal      décalage et aller à l'état 28
+    tpointvir  décalage et aller à l'état 29
+
+
+État 17
+
+    5 DECL_CONST: tconst tint . tvar tpointvir
+    6           | tconst tint . tvar tegal tnbDec tpointvir
+    7           | tconst tint . tvar tegal tnbExp tpointvir
+
+    tvar  décalage et aller à l'état 30
+
+
+État 18
+
+   14 CONDITION: tparOuv . tvar tegal tegal tnbDec tparFerm
+
+    tvar  décalage et aller à l'état 31
+
+
+État 19
+
+   15 IF: tif CONDITION . taccoOuv BODY taccoFerm
+   16   | tif CONDITION . taccoOuv BODY taccoFerm ELSE
+   17   | tif CONDITION . taccoOuv BODY taccoFerm ELIF
+
+    taccoOuv  décalage et aller à l'état 32
+
+
+État 20
+
+   22 PRINTF: tprintf tparOuv . tvar tparFerm tpointvir
+
+    tvar  décalage et aller à l'état 33
+
+
+État 21
+
+   26 CALCUL: tvar tegal . OPERATION tpointvir
+
+    tnbDec  décalage et aller à l'état 34
+    tnbExp  décalage et aller à l'état 35
+    tvar    décalage et aller à l'état 36
+
+    TERME      aller à l'état 37
+    OPERATION  aller à l'état 38
+
+
+État 22
+
+    8 BODY: DECL_INT BODY .
+
+    $défaut  réduction par utilisation de la règle 8 (BODY)
+
+
+État 23
+
+    9 BODY: DECL_CONST BODY .
+
+    $défaut  réduction par utilisation de la règle 9 (BODY)
+
+
+État 24
+
+    1 FICH: tmain taccoOuv BODY taccoFerm .
+
+    $défaut  réduction par utilisation de la règle 1 (FICH)
+
+
+État 25
+
+   12 BODY: IF BODY .
+
+    $défaut  réduction par utilisation de la règle 12 (BODY)
+
+
+État 26
+
+   10 BODY: PRINTF BODY .
+
+    $défaut  réduction par utilisation de la règle 10 (BODY)
+
+
+État 27
+
+   11 BODY: CALCUL BODY .
+
+    $défaut  réduction par utilisation de la règle 11 (BODY)
+
+
+État 28
+
+    3 DECL_INT: tint tvar tegal . tnbDec tpointvir
+    4         | tint tvar tegal . tnbExp tpointvir
+
+    tnbDec  décalage et aller à l'état 39
+    tnbExp  décalage et aller à l'état 40
+
+
+État 29
+
+    2 DECL_INT: tint tvar tpointvir .
+
+    $défaut  réduction par utilisation de la règle 2 (DECL_INT)
+
+
+État 30
+
+    5 DECL_CONST: tconst tint tvar . tpointvir
+    6           | tconst tint tvar . tegal tnbDec tpointvir
+    7           | tconst tint tvar . tegal tnbExp tpointvir
+
+    tegal      décalage et aller à l'état 41
+    tpointvir  décalage et aller à l'état 42
+
+
+État 31
+
+   14 CONDITION: tparOuv tvar . tegal tegal tnbDec tparFerm
+
+    tegal  décalage et aller à l'état 43
+
+
+État 32
+
+   15 IF: tif CONDITION taccoOuv . BODY taccoFerm
+   16   | tif CONDITION taccoOuv . BODY taccoFerm ELSE
+   17   | tif CONDITION taccoOuv . BODY taccoFerm ELIF
+
+    tint     décalage et aller à l'état 5
+    tconst   décalage et aller à l'état 6
+    tif      décalage et aller à l'état 7
+    tprintf  décalage et aller à l'état 8
+    tvar     décalage et aller à l'état 9
+
+    $défaut  réduction par utilisation de la règle 13 (BODY)
+
+    DECL_INT    aller à l'état 10
+    DECL_CONST  aller à l'état 11
+    BODY        aller à l'état 44
+    IF          aller à l'état 13
+    PRINTF      aller à l'état 14
+    CALCUL      aller à l'état 15
+
+
+État 33
+
+   22 PRINTF: tprintf tparOuv tvar . tparFerm tpointvir
+
+    tparFerm  décalage et aller à l'état 45
+
+
+État 34
+
+   23 TERME: tnbDec .
+   31 OPERATION: tnbDec .
+
+    tpointvir  réduction par utilisation de la règle 31 (OPERATION)
+    $défaut   réduction par utilisation de la règle 23 (TERME)
+
+
+État 35
+
+   24 TERME: tnbExp .
+
+    $défaut  réduction par utilisation de la règle 24 (TERME)
+
+
+État 36
+
+   25 TERME: tvar .
+   32 OPERATION: tvar .
+
+    tpointvir  réduction par utilisation de la règle 32 (OPERATION)
+    $défaut   réduction par utilisation de la règle 25 (TERME)
+
+
+État 37
+
+   27 OPERATION: TERME . tmoins TERME
+   30          | TERME . $@1 tplus $@2 TERME
+
+    tmoins  décalage et aller à l'état 46
+
+    $défaut  réduction par utilisation de la règle 28 ($@1)
+
+    $@1  aller à l'état 47
+
+
+État 38
+
+   26 CALCUL: tvar tegal OPERATION . tpointvir
+
+    tpointvir  décalage et aller à l'état 48
+
+
+État 39
+
+    3 DECL_INT: tint tvar tegal tnbDec . tpointvir
+
+    tpointvir  décalage et aller à l'état 49
+
+
+État 40
+
+    4 DECL_INT: tint tvar tegal tnbExp . tpointvir
+
+    tpointvir  décalage et aller à l'état 50
+
+
+État 41
+
+    6 DECL_CONST: tconst tint tvar tegal . tnbDec tpointvir
+    7           | tconst tint tvar tegal . tnbExp tpointvir
+
+    tnbDec  décalage et aller à l'état 51
+    tnbExp  décalage et aller à l'état 52
+
+
+État 42
+
+    5 DECL_CONST: tconst tint tvar tpointvir .
+
+    $défaut  réduction par utilisation de la règle 5 (DECL_CONST)
+
+
+État 43
+
+   14 CONDITION: tparOuv tvar tegal . tegal tnbDec tparFerm
+
+    tegal  décalage et aller à l'état 53
+
+
+État 44
+
+   15 IF: tif CONDITION taccoOuv BODY . taccoFerm
+   16   | tif CONDITION taccoOuv BODY . taccoFerm ELSE
+   17   | tif CONDITION taccoOuv BODY . taccoFerm ELIF
+
+    taccoFerm  décalage et aller à l'état 54
+
+
+État 45
+
+   22 PRINTF: tprintf tparOuv tvar tparFerm . tpointvir
+
+    tpointvir  décalage et aller à l'état 55
+
+
+État 46
+
+   27 OPERATION: TERME tmoins . TERME
+
+    tnbDec  décalage et aller à l'état 56
+    tnbExp  décalage et aller à l'état 35
+    tvar    décalage et aller à l'état 57
+
+    TERME  aller à l'état 58
+
+
+État 47
+
+   30 OPERATION: TERME $@1 . tplus $@2 TERME
+
+    tplus  décalage et aller à l'état 59
+
+
+État 48
+
+   26 CALCUL: tvar tegal OPERATION tpointvir .
+
+    $défaut  réduction par utilisation de la règle 26 (CALCUL)
+
+
+État 49
+
+    3 DECL_INT: tint tvar tegal tnbDec tpointvir .
+
+    $défaut  réduction par utilisation de la règle 3 (DECL_INT)
+
+
+État 50
+
+    4 DECL_INT: tint tvar tegal tnbExp tpointvir .
+
+    $défaut  réduction par utilisation de la règle 4 (DECL_INT)
+
+
+État 51
+
+    6 DECL_CONST: tconst tint tvar tegal tnbDec . tpointvir
+
+    tpointvir  décalage et aller à l'état 60
+
+
+État 52
+
+    7 DECL_CONST: tconst tint tvar tegal tnbExp . tpointvir
+
+    tpointvir  décalage et aller à l'état 61
+
+
+État 53
+
+   14 CONDITION: tparOuv tvar tegal tegal . tnbDec tparFerm
+
+    tnbDec  décalage et aller à l'état 62
+
+
+État 54
+
+   15 IF: tif CONDITION taccoOuv BODY taccoFerm .
+   16   | tif CONDITION taccoOuv BODY taccoFerm . ELSE
+   17   | tif CONDITION taccoOuv BODY taccoFerm . ELIF
+
+    telse  décalage et aller à l'état 63
+    telif  décalage et aller à l'état 64
+
+    $défaut  réduction par utilisation de la règle 15 (IF)
+
+    ELSE  aller à l'état 65
+    ELIF  aller à l'état 66
+
+
+État 55
+
+   22 PRINTF: tprintf tparOuv tvar tparFerm tpointvir .
+
+    $défaut  réduction par utilisation de la règle 22 (PRINTF)
+
+
+État 56
+
+   23 TERME: tnbDec .
+
+    $défaut  réduction par utilisation de la règle 23 (TERME)
+
+
+État 57
+
+   25 TERME: tvar .
+
+    $défaut  réduction par utilisation de la règle 25 (TERME)
+
+
+État 58
+
+   27 OPERATION: TERME tmoins TERME .
+
+    $défaut  réduction par utilisation de la règle 27 (OPERATION)
+
+
+État 59
+
+   30 OPERATION: TERME $@1 tplus . $@2 TERME
+
+    $défaut  réduction par utilisation de la règle 29 ($@2)
+
+    $@2  aller à l'état 67
+
+
+État 60
+
+    6 DECL_CONST: tconst tint tvar tegal tnbDec tpointvir .
+
+    $défaut  réduction par utilisation de la règle 6 (DECL_CONST)
+
+
+État 61
+
+    7 DECL_CONST: tconst tint tvar tegal tnbExp tpointvir .
+
+    $défaut  réduction par utilisation de la règle 7 (DECL_CONST)
+
+
+État 62
+
+   14 CONDITION: tparOuv tvar tegal tegal tnbDec . tparFerm
+
+    tparFerm  décalage et aller à l'état 68
+
+
+État 63
+
+   18 ELSE: telse . taccoOuv BODY taccoFerm
+
+    taccoOuv  décalage et aller à l'état 69
+
+
+État 64
+
+   19 ELIF: telif . CONDITION taccoOuv BODY taccoFerm ELIF
+   20     | telif . CONDITION taccoOuv BODY taccoFerm
+   21     | telif . CONDITION taccoOuv BODY taccoFerm ELSE
+
+    tparOuv  décalage et aller à l'état 18
+
+    CONDITION  aller à l'état 70
+
+
+État 65
+
+   16 IF: tif CONDITION taccoOuv BODY taccoFerm ELSE .
+
+    $défaut  réduction par utilisation de la règle 16 (IF)
+
+
+État 66
+
+   17 IF: tif CONDITION taccoOuv BODY taccoFerm ELIF .
+
+    $défaut  réduction par utilisation de la règle 17 (IF)
+
+
+État 67
+
+   30 OPERATION: TERME $@1 tplus $@2 . TERME
+
+    tnbDec  décalage et aller à l'état 56
+    tnbExp  décalage et aller à l'état 35
+    tvar    décalage et aller à l'état 57
+
+    TERME  aller à l'état 71
+
+
+État 68
+
+   14 CONDITION: tparOuv tvar tegal tegal tnbDec tparFerm .
+
+    $défaut  réduction par utilisation de la règle 14 (CONDITION)
+
+
+État 69
+
+   18 ELSE: telse taccoOuv . BODY taccoFerm
+
+    tint     décalage et aller à l'état 5
+    tconst   décalage et aller à l'état 6
+    tif      décalage et aller à l'état 7
+    tprintf  décalage et aller à l'état 8
+    tvar     décalage et aller à l'état 9
+
+    $défaut  réduction par utilisation de la règle 13 (BODY)
+
+    DECL_INT    aller à l'état 10
+    DECL_CONST  aller à l'état 11
+    BODY        aller à l'état 72
+    IF          aller à l'état 13
+    PRINTF      aller à l'état 14
+    CALCUL      aller à l'état 15
+
+
+État 70
+
+   19 ELIF: telif CONDITION . taccoOuv BODY taccoFerm ELIF
+   20     | telif CONDITION . taccoOuv BODY taccoFerm
+   21     | telif CONDITION . taccoOuv BODY taccoFerm ELSE
+
+    taccoOuv  décalage et aller à l'état 73
+
+
+État 71
+
+   30 OPERATION: TERME $@1 tplus $@2 TERME .
+
+    $défaut  réduction par utilisation de la règle 30 (OPERATION)
+
+
+État 72
+
+   18 ELSE: telse taccoOuv BODY . taccoFerm
+
+    taccoFerm  décalage et aller à l'état 74
+
+
+État 73
+
+   19 ELIF: telif CONDITION taccoOuv . BODY taccoFerm ELIF
+   20     | telif CONDITION taccoOuv . BODY taccoFerm
+   21     | telif CONDITION taccoOuv . BODY taccoFerm ELSE
+
+    tint     décalage et aller à l'état 5
+    tconst   décalage et aller à l'état 6
+    tif      décalage et aller à l'état 7
+    tprintf  décalage et aller à l'état 8
+    tvar     décalage et aller à l'état 9
+
+    $défaut  réduction par utilisation de la règle 13 (BODY)
+
+    DECL_INT    aller à l'état 10
+    DECL_CONST  aller à l'état 11
+    BODY        aller à l'état 75
+    IF          aller à l'état 13
+    PRINTF      aller à l'état 14
+    CALCUL      aller à l'état 15
+
+
+État 74
+
+   18 ELSE: telse taccoOuv BODY taccoFerm .
+
+    $défaut  réduction par utilisation de la règle 18 (ELSE)
+
+
+État 75
+
+   19 ELIF: telif CONDITION taccoOuv BODY . taccoFerm ELIF
+   20     | telif CONDITION taccoOuv BODY . taccoFerm
+   21     | telif CONDITION taccoOuv BODY . taccoFerm ELSE
+
+    taccoFerm  décalage et aller à l'état 76
+
+
+État 76
+
+   19 ELIF: telif CONDITION taccoOuv BODY taccoFerm . ELIF
+   20     | telif CONDITION taccoOuv BODY taccoFerm .
+   21     | telif CONDITION taccoOuv BODY taccoFerm . ELSE
+
+    telse  décalage et aller à l'état 63
+    telif  décalage et aller à l'état 64
+
+    $défaut  réduction par utilisation de la règle 20 (ELIF)
+
+    ELSE  aller à l'état 77
+    ELIF  aller à l'état 78
+
+
+État 77
+
+   21 ELIF: telif CONDITION taccoOuv BODY taccoFerm ELSE .
+
+    $défaut  réduction par utilisation de la règle 21 (ELIF)
+
+
+État 78
+
+   19 ELIF: telif CONDITION taccoOuv BODY taccoFerm ELIF .
+
+    $défaut  réduction par utilisation de la règle 19 (ELIF)

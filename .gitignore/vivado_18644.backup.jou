@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Vivado v2018.2 (64-bit)
+# SW Build 2258646 on Thu Jun 14 20:02:38 MDT 2018
+# IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
+# Start of session at: Fri Apr  8 10:46:01 2022
+# Process ID: 18644
+# Current directory: /home/mallevil/Documents/Projet_info/Projet_Syst_Info
+# Command line: vivado
+# Log file: /home/mallevil/Documents/Projet_info/Projet_Syst_Info/vivado.log
+# Journal file: /home/mallevil/Documents/Projet_info/Projet_Syst_Info/vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project /home/mallevil/Documents/Archi/TPArchi/project_1/project_1.xpr
+update_compile_order -fileset sources_1

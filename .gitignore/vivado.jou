@@ -1,0 +1,63 @@
+#-----------------------------------------------------------
+# Vivado v2018.2 (64-bit)
+# SW Build 2258646 on Thu Jun 14 20:02:38 MDT 2018
+# IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
+# Start of session at: Fri Apr  8 10:49:58 2022
+# Process ID: 19396
+# Current directory: /home/mallevil/Documents/Projet_info/Projet_Syst_Info
+# Command line: vivado
+# Log file: /home/mallevil/Documents/Projet_info/Projet_Syst_Info/vivado.log
+# Journal file: /home/mallevil/Documents/Projet_info/Projet_Syst_Info/vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project /home/mallevil/Documents/Archi/TPArchi/project_1/project_1.xpr
+open_project /home/mallevil/Documents/Projet_info/Projet_Syst_Info/project_1/project_1.xpr
+update_compile_order -fileset sources_1
+export_ip_user_files -of_objects  [get_files /home/mallevil/Documents/Projet_info/Projet_Syst_Info/project_1/project_1.srcs/sources_1/new/UAL.v] -no_script -reset -force -quiet
+remove_files  /home/mallevil/Documents/Projet_info/Projet_Syst_Info/project_1/project_1.srcs/sources_1/new/UAL.v
+close [ open /home/mallevil/Documents/Projet_info/Projet_Syst_Info/project_1/project_1.srcs/sources_1/new/ALU.vhd w ]
+add_files /home/mallevil/Documents/Projet_info/Projet_Syst_Info/project_1/project_1.srcs/sources_1/new/ALU.vhd
+open_project /home/mallevil/Documents/Archi/TPArchi/project_1/project_1.xpr
+update_compile_order -fileset sources_1
+current_project project_1
+update_compile_order -fileset sources_1
+current_project project_1(2)
+current_project project_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+launch_runs synth_1 -jobs 2
+wait_on_run synth_1
+reset_run synth_1
+launch_runs synth_1 -jobs 2
+wait_on_run synth_1
+reset_run synth_1
+launch_runs synth_1 -jobs 2
+wait_on_run synth_1
+reset_run synth_1
+launch_runs synth_1 -jobs 2
+wait_on_run synth_1
+reset_run synth_1
+launch_runs synth_1 -jobs 2
+wait_on_run synth_1
+reset_run synth_1
+launch_runs synth_1 -jobs 2
+wait_on_run synth_1
+launch_runs impl_1 -jobs 2
+wait_on_run impl_1
+file mkdir /home/mallevil/Documents/Projet_info/Projet_Syst_Info/project_1/project_1.srcs/sim_1/new
+set_property SOURCE_SET sources_1 [get_filesets sim_1]
+close [ open /home/mallevil/Documents/Projet_info/Projet_Syst_Info/project_1/project_1.srcs/sim_1/new/Test_ALU.vhd w ]
+add_files -fileset sim_1 /home/mallevil/Documents/Projet_info/Projet_Syst_Info/project_1/project_1.srcs/sim_1/new/Test_ALU.vhd
+update_compile_order -fileset sim_1
+current_project project_1(2)
+close_project
+update_compile_order -fileset sim_1
+launch_simulation
+reset_run synth_1
+launch_runs synth_1 -jobs 2
+wait_on_run synth_1
+launch_simulation
+launch_simulation
+source Test_ALU.tcl
+close_sim

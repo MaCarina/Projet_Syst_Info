@@ -1,0 +1,24 @@
+#-----------------------------------------------------------
+# Vivado v2018.2 (64-bit)
+# SW Build 2258646 on Thu Jun 14 20:02:38 MDT 2018
+# IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
+# Start of session at: Fri Apr  8 10:37:46 2022
+# Process ID: 17232
+# Current directory: /home/mallevil/Documents/Projet_info/Projet_Syst_Info
+# Command line: vivado
+# Log file: /home/mallevil/Documents/Projet_info/Projet_Syst_Info/vivado.log
+# Journal file: /home/mallevil/Documents/Projet_info/Projet_Syst_Info/vivado.jou
+#-----------------------------------------------------------
+start_gui
+create_project project_1 /home/mallevil/Documents/Projet_info/Projet_Syst_Info/project_1 -part xc7a35tcpg236-1
+set_property board_part digilentinc.com:basys3:part0:1.1 [current_project]
+file mkdir /home/mallevil/Documents/Projet_info/Projet_Syst_Info/project_1/project_1.srcs/sources_1/new
+close [ open /home/mallevil/Documents/Projet_info/Projet_Syst_Info/project_1/project_1.srcs/sources_1/new/UAL.v w ]
+add_files /home/mallevil/Documents/Projet_info/Projet_Syst_Info/project_1/project_1.srcs/sources_1/new/UAL.v
+update_compile_order -fileset sources_1
+close [ open /home/mallevil/Documents/Projet_info/Projet_Syst_Info/project_1/project_1.srcs/sources_1/new/UAL.vhd w ]
+add_files /home/mallevil/Documents/Projet_info/Projet_Syst_Info/project_1/project_1.srcs/sources_1/new/UAL.vhd
+update_compile_order -fileset sources_1
+export_ip_user_files -of_objects  [get_files /home/mallevil/Documents/Projet_info/Projet_Syst_Info/project_1/project_1.srcs/sources_1/new/UAL.vhd] -no_script -reset -force -quiet
+remove_files  /home/mallevil/Documents/Projet_info/Projet_Syst_Info/project_1/project_1.srcs/sources_1/new/UAL.vhd
+update_compile_order -fileset sources_1
